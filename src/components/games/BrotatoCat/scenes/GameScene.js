@@ -84,8 +84,7 @@ export class GameScene extends Phaser.Scene {
     this.gameConfig = gameConfig;
     
     // 創建關卡系統
-    this.levelSystem = new LevelSystem(this);
-    this.levelSystem.startLevel();
+    this.setupLevelSystem();
 
     // 添加升級按鈕點擊事件
     this.ui.upgradeButtons.forEach(({ key, button }) => {
@@ -546,5 +545,10 @@ export class GameScene extends Phaser.Scene {
       this.isLevelComplete = false;
       this.levelSystem.startNextLevel();
     });
+  }
+
+  setupLevelSystem() {
+    this.levelSystem = new LevelSystem(this);
+    this.levelSystem.startLevel();
   }
 } 

@@ -10,6 +10,8 @@ export class LevelSystem {
     this.isLevelComplete = false;
     this.isGameOver = false;
     this.isLevelEnding = false;
+    this.levelDuration = this.scene.gameConfig.level.duration;
+    this.startTime = Date.now();
   }
 
   startLevel() {
@@ -17,8 +19,8 @@ export class LevelSystem {
     this.isGameOver = false;
     this.isLevelEnding = false;
     this.levelTime = this.scene.gameConfig.level.duration;
-    this.scene.ui.timeText.setText(this.levelTime);
-    this.scene.ui.timeText.setColor('#ffffff');
+    this.scene.ui.timeNumber.setText(this.levelTime);
+    this.scene.ui.timeNumber.setColor('#ffffff');
     this.startLevelTimer();
   }
 
@@ -31,10 +33,10 @@ export class LevelSystem {
       delay: 1000,
       callback: () => {
         this.levelTime--;
-        this.scene.ui.timeText.setText(this.levelTime);
+        this.scene.ui.timeNumber.setText(this.levelTime);
         
         if (this.levelTime <= this.scene.gameConfig.level.warningTime) {
-          this.scene.ui.timeText.setColor('#ff0000');
+          this.scene.ui.timeNumber.setColor('#ff0000');
         }
         
         if (this.levelTime <= 0) {
@@ -197,8 +199,8 @@ export class LevelSystem {
     this.level++;
     this.scene.ui.levelText.setText('STAGE ' + this.level);
     this.levelTime = this.scene.gameConfig.level.duration;
-    this.scene.ui.timeText.setText(this.levelTime);
-    this.scene.ui.timeText.setColor('#ffffff');
+    this.scene.ui.timeNumber.setText(this.levelTime);
+    this.scene.ui.timeNumber.setColor('#ffffff');
     
     // 重置遊戲狀態
     this.isLevelComplete = false;
@@ -216,5 +218,9 @@ export class LevelSystem {
 
   isLevelInProgress() {
     return this.levelTime > 0 && !this.isLevelComplete && !this.isLevelEnding;
+  }
+
+  getRemainingTime() {
+    return this.levelTime;
   }
 } 
