@@ -138,6 +138,9 @@ export class GameScene extends Phaser.Scene {
       // 更新血條位置
       this.ui.healthBar.setPosition(this.player.x, this.player.y - 20);
       
+      // 更新時間
+      this.ui.timeNumber.setText(this.levelSystem.getRemainingTime());
+      
       // 生成敵人
       const levelConfig = this.levelSystem.getCurrentLevelConfig();
       if (Phaser.Math.Between(0, 100) < levelConfig.spawnRate) {
@@ -523,5 +526,25 @@ export class GameScene extends Phaser.Scene {
     } else {
       this.lowHealthBorder.setAlpha(0);
     }
+  }
+
+  levelComplete() {
+    // 停止遊戲邏輯
+    this.isLevelComplete = true;
+    
+    // 創建下一關 UI
+    this.nextStageUI = UISystem.createNextStageUI(this);
+    
+    // 添加下一關按鈕點擊事件
+    this.nextStageUI.nextStageButton.on('pointerdown', () => {
+      // 移除下一關 UI
+      this.nextStageUI.overlay.destroy();
+      this.nextStageUI.nextStageText.destroy();
+      this.nextStageUI.nextStageButton.destroy();
+      
+      // 開始下一關
+      this.isLevelComplete = false;
+      this.levelSystem.startNextLevel();
+    });
   }
 } 

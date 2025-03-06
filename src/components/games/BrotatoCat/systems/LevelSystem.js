@@ -179,7 +179,7 @@ export class LevelSystem {
       });
 
       // 創建下一關 UI
-      const uiElements = this.scene.ui.createNextStageUI();
+      const uiElements = UISystem.createNextStageUI(this.scene);
       
       // 保存 UI 元素到 scene.ui
       this.scene.ui.overlay = uiElements.overlay;

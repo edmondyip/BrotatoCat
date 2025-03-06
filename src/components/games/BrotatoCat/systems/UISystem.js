@@ -11,18 +11,25 @@ export class UISystem {
       }),
       
       // 關卡文字
-      levelText: scene.add.text(16, 50, 'STAGE 1', {
+      levelText: scene.add.text(400, 584, 'STAGE 1', {
         fontSize: '24px',
         fill: '#ffffff',
         fontFamily: '"Big Shoulders Display", sans-serif'
-      }),
+      }).setOrigin(0.5),
       
       // 時間文字
-      timeText: scene.add.text(16, 84, gameConfig.level.duration, {
-        fontSize: '24px',
+      timeText: scene.add.text(400, 16, 'TIME', {
+        fontSize: '16px',
         fill: '#ffffff',
         fontFamily: '"Big Shoulders Display", sans-serif'
-      }),
+      }).setOrigin(0.5),
+      
+      // 時間數字
+      timeNumber: scene.add.text(400, 40, gameConfig.level.duration, {
+        fontSize: '32px',
+        fill: '#ffffff',
+        fontFamily: '"Big Shoulders Display", sans-serif'
+      }).setOrigin(0.5),
       
       // 玩家血條背景
       healthBarBg: scene.add.graphics(),
